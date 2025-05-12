@@ -1,90 +1,77 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   version="1.1"
-   id="Ebene_1"
-   x="0px"
-   y="0px"
+   id="hg-readme-banner-v2"
    viewBox="0 0 800 200"
-   xml:space="preserve"
    width="800"
    height="200"
+   version="1.1"
    sodipodi:docname="project.svg"
-   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
-   inkscape:export-filename="project.png"
-   inkscape:export-xdpi="96"
-   inkscape:export-ydpi="96"
+   xml:space="preserve"
+   inkscape:version="1.4.1 (93de688d07, 2025-03-30)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:dc="http://purl.org/dc/elements/1.1/"><sodipodi:namedview
-   pagecolor="#ffffff"
-   bordercolor="#666666"
-   borderopacity="1"
-   objecttolerance="10"
-   gridtolerance="10"
-   guidetolerance="10"
-   inkscape:pageopacity="0"
-   inkscape:pageshadow="2"
-   inkscape:window-width="1916"
-   inkscape:window-height="1031"
-   id="namedview13"
-   showgrid="false"
-   inkscape:zoom="1.410678"
-   inkscape:cx="129.01598"
-   inkscape:cy="114.8384"
-   inkscape:window-x="1920"
-   inkscape:window-y="27"
-   inkscape:window-maximized="1"
-   inkscape:current-layer="Ebene_1"
-   inkscape:showpageshadow="0"
-   inkscape:pagecheckerboard="0"
-   inkscape:deskcolor="#d1d1d1" /><metadata
-   id="metadata33"><rdf:RDF><cc:Work
-       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
-         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
-   id="defs31">
-
-</defs>
-<style
-   type="text/css"
-   id="style2">
-    .st0{fill-rule:evenodd;clip-rule:evenodd;fill:#E73E11;}
-    .st1{fill-rule:evenodd;clip-rule:evenodd;fill:#0371B9;}
-    .st2{fill:#132E48;}
-    .st3{font-family:'OpenSans-Bold';}
-    .st4{font-size:29.5168px;}
-    .st5{fill-rule:evenodd;clip-rule:evenodd;fill:none;}
-    .st6{opacity:0.5;fill:#132E48;}
-    .st7{font-family:'OpenSans';}
-    .st8{font-size:12px;}
-</style>
-<text
-   class="st2 st3 st4"
-   id="text10"
-   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:29.5173px;font-family:'Open Sans', sans-serif;-inkscape-font-specification:'OpenSans-Bold, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#132e48"
-   x="192.43155"
-   y="107.939">hausgold/valkey</text>
-<rect
-   x="194.23985"
-   y="119.60001"
-   class="st5"
-   width="314.5"
-   height="24"
-   id="rect12"
-   style="clip-rule:evenodd;fill:none;fill-rule:evenodd" /><text
-   class="st6 st7 st8"
-   id="text14"
-   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Open Sans', sans-serif;-inkscape-font-specification:'Open Sans, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;opacity:0.5;fill:#132e48"
-   x="194.21715"
-   y="128.75729">mDNS enabled valkey/valkey</text>
-
-<path
-   id="Path"
-   fill="#123678"
-   fill-rule="evenodd"
-   stroke="none"
-   d="M 69.998197,145.19883 46.339317,130.39664 V 67.133678 l 57.857993,-33.168385 56.45606,33.223553 v 66.544184 l -57.35249,32.30168 -19.911379,-12.4577 v -26.67327 -3.6414 L 72.593074,116.50728 V 82.200594 l 31.260506,-17.920625 30.54603,17.975778 v 35.948933 l -24.18401,13.62041 v -14.47814 c 7.24941,-2.79165 12.45295,-9.96732 12.45295,-18.436182 0,-10.915751 -8.64498,-19.683249 -19.17194,-19.683249 -10.527499,0 -19.171957,8.767498 -19.171957,19.683249 0,8.468862 5.203009,15.644532 12.452427,18.436182 v 27.43233 l 6.91473,4.3262 42.40278,-23.88215 V 75.51343 L 104.10183,50.80118 60.898096,75.5686 v 46.76336 l 9.100101,5.69366 z M 103.49661,89.866905 c 4.7638,0 8.53254,4.104479 8.53254,9.043863 0,4.939352 -3.76874,9.043852 -8.53254,9.043852 -4.763821,0 -8.533069,-4.1045 -8.533069,-9.043852 0,-4.939384 3.769248,-9.043864 8.533069,-9.043863 z"
-   style="stroke-width:0.999999" /></svg>
+   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
+     id="namedview4"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.116875"
+     inkscape:cx="239.50755"
+     inkscape:cy="59.093453"
+     inkscape:window-width="1916"
+     inkscape:window-height="1031"
+     inkscape:window-x="1920"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="hg-readme-banner-v2" /><defs
+     id="defs2"><linearGradient
+       id="a"
+       x1="112.46"
+       y1="309.13"
+       x2="314.5"
+       y2="309.13"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-33.985 -122.816)"><stop
+         offset="0"
+         stop-color="#1992f4"
+         id="stop1" /><stop
+         offset="1"
+         stop-color="#2b8af6"
+         id="stop2" /></linearGradient></defs><style
+     id="style2">.st3{font-family:'OpenSans-Bold'}.st4{font-size:29.5168px}.st5{fill-rule:evenodd;clip-rule:evenodd;fill:none}.st7{font-family:'OpenSans'}.st8{font-size:12px}@media (prefers-color-scheme:dark){text{fill:#f0f6fc!important}}</style><text
+     y="107.939"
+     x="192.432"
+     style="font-family:'Open Sans', sans-serif;-inkscape-font-specification:'OpenSans-Bold, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start"
+     class="st3 st4"
+     font-weight="700"
+     font-size="29.517"
+     font-family="'Open Sans',sans-serif"
+     fill="#3f3e4b"
+     id="text2">hausgold/valkey</text><path
+     class="st5"
+     clip-rule="evenodd"
+     fill="none"
+     fill-rule="evenodd"
+     d="M194.24 119.6h314.5v24h-314.5z"
+     id="path2" /><text
+     y="128.757"
+     x="194.217"
+     style="font-family:'Open Sans', sans-serif;-inkscape-font-specification:'Open Sans, sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start"
+     class="st7 st8"
+     font-weight="400"
+     font-size="12"
+     font-family="'Open Sans',sans-serif"
+     opacity=".75"
+     fill="#3f3e4b"
+     id="text3">mDNS enabled valkey/valkey</text><path
+     id="Path"
+     fill="#123678"
+     fill-rule="evenodd"
+     stroke="none"
+     d="M 13.482285,60.694962 0.998384,52.884399 V 19.502914 L 31.527868,2.001205 61.317604,19.532024 V 54.64489 L 31.054855,71.68927 20.548372,65.115807 V 51.041328 49.119896 L 14.851504,45.555508 V 27.453159 l 16.494993,-9.456039 16.117988,9.485142 v 18.968895 l -12.76099,7.186981 v -7.639565 c 3.825245,-1.473053 6.570957,-5.259384 6.570957,-9.728084 0,-5.759831 -4.561638,-10.386109 -10.116314,-10.386109 -5.554966,0 -10.116321,4.626278 -10.116321,10.386109 0,4.4687 2.745432,8.255031 6.570677,9.728084 v 14.475003 l 3.648639,2.282772 22.37435,-12.601708 V 23.924595 L 31.477489,10.884869 8.680504,23.953705 v 24.675262 l 4.801781,3.00433 z M 31.158138,31.498383 c 2.513684,0 4.502301,2.165779 4.502301,4.772106 0,2.606315 -1.988617,4.772098 -4.502301,4.772098 -2.513691,0 -4.50258,-2.165783 -4.50258,-4.772098 0,-2.606327 1.988889,-4.772106 4.50258,-4.772106 z"
+     transform="matrix(1.6937944,0,0,1.6937944,49.064734,37.592415)" /></svg>
