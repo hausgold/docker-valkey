@@ -10,7 +10,7 @@ SHELL := bash
 REGISTRY ?=
 CANONICAL_NAME ?= valkey
 IMAGE_NAME ?= hausgold/$(CANONICAL_NAME)
-IMAGE_REF ?= 7.2
+IMAGE_REF ?= 8.1
 IMAGE_URI := $(IMAGE_NAME):$(IMAGE_REF)
 
 # Host binaries

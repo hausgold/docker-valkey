@@ -1,4 +1,4 @@
-FROM valkey/valkey:7.2
+FROM valkey/valkey:8.1
 LABEL org.opencontainers.image.authors="containers@hausgold.de"
 
 # You can change this environment variable on run's with -e
