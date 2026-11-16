@@ -1,0 +1,170 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+PROGNAME="$(basename "${0}")"
+
+# Print the usage of the script.
+function help()
+{
+  cat <<EOF
+Usage: ${PROGNAME} IMAGE [NAME]
+
+Run the smoke test on a built Docker image. The image is started with
+its default configuration, next to a second container of the same image
+which acts as the client. The client looks the server up via mDNS and
+connects to it by that hostname. NAME prefixes the containers and names
+the network of the test run, it defaults to valkey-test.
+
+Eg. ${0} hausgold/valkey:latest
+EOF
+}
+
+if [ -z "${1:-}" -o "${1:-}" = '-h' -o "${1:-}" = '--help' ]; then
+  help
+  exit 0
+fi
+
+# Print an error message and the usage to stderr, then exit.
+#
+# $1 - the error message
+function panic()
+{
+  >&2 echo "${PROGNAME}: ${1}"
+  >&2 echo -e '\n---\n'
+  >&2 help
+  exit 1
+}
+
+command -v docker >/dev/null || panic 'docker: command not found'
+
+# The Docker image to test
+IMAGE="${1}"
+# The name prefix of the containers, and the name of the network
+NAME="${2:-valkey-test}"
+# The container which runs the default configuration
+SERVER="${NAME}-server"
+# The container which looks up and connects to the server
+CLIENT="${NAME}-client"
+# We use a dedicated network, so that containers of other projects cannot
+# claim the mDNS hostname of the server on the default bridge
+NETWORK="${NAME}"
+# The default hostname of the image, as documented on the readme
+MDNS_HOSTNAME='valkey.local'
+# The database count of the default server arguments (--databases 1000),
+# a stock server runs 16
+DATABASES=1000
+# The seconds we wait for the server startup, and for the mDNS lookup
+TIMEOUT=60
+
+# Remove the containers and the network of the test run.
+function cleanup()
+{
+  docker rm --force --volumes "${SERVER}" "${CLIENT}" >/dev/null 2>&1 || true
+  docker network rm "${NETWORK}" >/dev/null 2>&1 || true
+}
+
+# Print the failed check together with the latest server logs to stderr,
+# then exit.
+#
+# $1 - the description of the failed check
+function fail()
+{
+  >&2 echo "${PROGNAME}: ${1}"
+  >&2 echo -e '\n---\n'
+  >&2 docker logs --tail 50 "${SERVER}" || true
+  exit 1
+}
+
+# Retry a command every second until it succeeds, or the timeout is
+# reached.
+#
+# $1 - the timeout in seconds
+# $@ - the command to run
+function wait-for()
+{
+  local deadline=$((SECONDS + ${1}))
+  shift
+
+  until "${@}" >/dev/null 2>&1; do
+    [ "${SECONDS}" -lt "${deadline}" ] || return 1
+    sleep 1
+  done
+}
+
+# Check whether the server answers a ping on its own loopback interface.
+function server-ready()
+{
+  [ "$(docker exec "${SERVER}" valkey-cli PING)" = 'PONG' ]
+}
+
+# Check whether the client resolves the mDNS hostname to the address of
+# the server. We ask avahi directly, so no other name service can answer.
+function mdns-resolves()
+{
+  local address
+  address="$(
+    docker exec "${CLIENT}" avahi-resolve-host-name -4 "${MDNS_HOSTNAME}" \
+      | cut -f2
+  )"
+  [ "${address}" = "${SERVER_ADDRESS}" ]
+}
+
+# Run a command on the server from the client and print the bare reply.
+# The server is addressed by its mDNS hostname, so the connection goes
+# over the network.
+#
+# $@ - the valkey-cli arguments, eg. the command to run
+function client-cli()
+{
+  docker exec "${CLIENT}" valkey-cli -h "${MDNS_HOSTNAME}" "${@}"
+}
+
+# Drop the leftovers of an aborted run, and clean up after this one
+cleanup
+trap cleanup EXIT
+
+echo "Start ${IMAGE} with the default configuration"
+docker network create "${NETWORK}" >/dev/null
+docker run --detach --name "${SERVER}" --network "${NETWORK}" \
+  "${IMAGE}" >/dev/null
+wait-for "${TIMEOUT}" server-ready \
+  || fail 'The server did not answer a ping'
+
+echo "Look up ${MDNS_HOSTNAME} via mDNS"
+# The client needs its own mDNS hostname, otherwise both containers
+# would claim the default one
+docker run --detach --name "${CLIENT}" --network "${NETWORK}" \
+  --env MDNS_HOSTNAME="${CLIENT}.local" "${IMAGE}" >/dev/null
+SERVER_ADDRESS="$(docker inspect "${SERVER}" \
+  --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}')"
+wait-for "${TIMEOUT}" mdns-resolves \
+  || fail "${MDNS_HOSTNAME} did not resolve to ${SERVER_ADDRESS}"
+
+echo "Connect to ${MDNS_HOSTNAME}"
+PONG="$(client-cli PING)" \
+  || fail 'The client could not connect to the server'
+[ "${PONG}" = 'PONG' ] \
+  || fail "The server answered the ping unexpectedly: ${PONG}"
+
+echo 'Check the database count of the default server arguments'
+# We ask the server for the count, because valkey-cli only warns about
+# an unknown database (-n) and then runs the command on database 0
+COUNT="$(
+  client-cli CONFIG GET databases \
+    | tail -n 1
+)" || fail 'The database count could not be read'
+[ "${COUNT}" = "${DATABASES}" ] \
+  || fail "The server runs ${COUNT} instead of ${DATABASES} databases"
+
+echo 'Write and read a key on the last database'
+# valkey-cli exits successfully on error replies, so only the value we
+# read back tells whether the write arrived
+client-cli -n "$((DATABASES - 1))" SET smoke passed >/dev/null \
+  || fail 'The key could not be written'
+VALUE="$(client-cli -n "$((DATABASES - 1))" GET smoke)" \
+  || fail 'The key could not be read'
+[ "${VALUE}" = 'passed' ] \
+  || fail "The server returned an unexpected value: ${VALUE}"
+
+echo 'All checks passed'
